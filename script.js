@@ -2,7 +2,7 @@
 // PixelGet — Main Script
 // =============================================
 
-const WORKER_ENDPOINT = '/api/validate'; // Cloudflare Worker endpoint (nanti setup)
+const WORKER_ENDPOINT = 'https://pixelgetbypas.antarahimmuhammad.workers.dev';
 const HISTORY_KEY = 'pixelget_history';
 const MAX_HISTORY = 10;
 
@@ -404,3 +404,12 @@ inputTextarea.addEventListener('keydown', (e) => {
 
 // ---- Init ----
 renderHistory();
+
+// ---- Service Worker (PWA) ----
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW registration failed:', err));
+    });
+}
